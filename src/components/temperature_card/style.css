@@ -1,0 +1,12 @@
+.temperature-card {
+    text-align: center;
+    background: linear-gradient(135deg, #00aaff, #00ffaa);
+    color: white;
+    border-radius: 10px;
+    height: 120px;
+}
+
+.temperature-value {
+  font-size: 2.5em;
+  font-weight: bold;
+}  

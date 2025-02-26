@@ -1,0 +1,36 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensures full viewport height */
+  }
+  
+  .main-layout {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  
+  .site-layout {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  
+  .site-layout-background {
+    background-color: #fff;
+  }
+  
+  footer {
+    text-align: center;
+    background-color: #f1f1f1;
+  }
+  
+  .content {
+    padding: 24px;
+    min-height: 100%; /* Ensure it takes remaining space */
+  }
+  
+  .sidebar_container {
+    display: flex;
+  }
+  

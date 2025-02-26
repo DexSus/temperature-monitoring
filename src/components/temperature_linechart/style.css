@@ -1,0 +1,13 @@
+.chart-card {
+  border-radius: 10px;
+}
+
+.ant-card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.line-chart-container {
+  position: relative;
+  height: 200px;
+}

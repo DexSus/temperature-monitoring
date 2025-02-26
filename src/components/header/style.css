@@ -1,0 +1,41 @@
+.header-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    background-color: #00A76F;
+    color: #fff;
+}
+
+.header-logo {
+    width: 5rem;
+    height: 5rem;
+}
+
+.header-nav {
+    flex-grow: 1; 
+}
+
+.nav-list {
+    display: flex;
+    justify-content: space-around;
+    gap: 2rem;
+}
+
+.header-nav ul {
+    font-size: 1.5rem;
+    list-style: none;
+    
+    margin-top: 5px;
+}
+
+.header-nav a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    transition: 0.3s ease-in-out;
+}
+
+.header-nav a:hover {
+    color: #b6b8b882;
+}

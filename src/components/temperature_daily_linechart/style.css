@@ -1,0 +1,10 @@
+.chart-card {
+  border-radius: 10px;
+}
+
+.daily-chart-container {
+  position: relative;
+  height: 200px;
+  min-width: 600px;
+  width: 100%;
+}
