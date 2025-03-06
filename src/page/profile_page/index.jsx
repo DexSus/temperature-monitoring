@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Upload, Button, Input, Form, Tabs, Typography, Space, Card, } from "antd";
+import { Upload, Button, Input, Form, Tabs, Typography, Space, Card } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import "./style.css";
 import userPhoto from "../../assets/img/user.png";
@@ -7,8 +7,6 @@ import { CurrentTemperatureCard } from "../../components/temperature_card/index"
 import { TemperatureLineChart } from "../../components/temperature_linechart";
 import { DailyTemperatureChart } from "../../components/temperature_daily_linechart";
 import { TemperatureDoughnutChart } from "../../components/temperature_doughnut_chart";
-
-const { TabPane } = Tabs;
 
 export const ProfilePage = () => {
   const [user, setUser] = useState({
@@ -61,7 +59,6 @@ export const ProfilePage = () => {
     { time: '22:00', temperature: 20.5 },
     { time: '23:00', temperature: 20 }
   ];
-  
 
   const dailyData = [
     { date: '2025-02-01', averageTemperature: 20.5 },
@@ -92,81 +89,90 @@ export const ProfilePage = () => {
     ],
   };
 
+  const tabItems = [
+    {
+      key: "1",
+      label: "Особиста інформація",
+      children: (
+        <Card className="profile-card">
+          <Space
+            className="profile_content"
+            direction="vertical"
+            size="large"
+            align="center"
+          >
+            <div className="profile-photo-container">
+              <img src={user.photo} alt="Профіль" className="profile-photo" />
+              <Upload
+                showUploadList={false}
+                beforeUpload={() => false}
+                onChange={handlePhotoChange}
+              >
+                <Button
+                  icon={<UploadOutlined />}
+                  className="change-photo-button"
+                >
+                  Змінити фото
+                </Button>
+              </Upload>
+            </div>
+            <Form layout="vertical" className="profile-form">
+              <Form.Item label="Повне ім'я">
+                <Input
+                  name="fullName"
+                  value={user.fullName}
+                  onChange={handleInputChange}
+                />
+              </Form.Item>
+              <Form.Item label="Номер датчика">
+                <Input
+                  name="sensorNumber"
+                  value={user.sensorNumber}
+                  onChange={handleInputChange}
+                />
+              </Form.Item>
+              <Form.Item label="Додаткова інформація">
+                <Input.TextArea
+                  name="additionalInfo"
+                  value={user.additionalInfo}
+                  onChange={handleInputChange}
+                  rows={4}
+                />
+              </Form.Item>
+              <Form.Item>
+                <Button type="primary" onClick={handleSave}>
+                  Зберегти
+                </Button>
+              </Form.Item>
+            </Form>
+          </Space>
+        </Card>
+      ),
+    },
+    {
+      key: "2",
+      label: "Статистика",
+      children: (
+        <div className="statistics_content">
+          <Typography.Title level={4}> Статистика користувача </Typography.Title>
+          <div className="charts">
+            <div className="charts_block">
+              <CurrentTemperatureCard temperature={36.6} />
+              <TemperatureDoughnutChart data={data} />
+            </div>
+            <div className="charts_block">
+              <TemperatureLineChart data={hourlyData} />
+              <DailyTemperatureChart data={dailyData} />
+            </div>
+          </div>
+        </div>
+      ),
+    },
+  ];
 
   return (
     <div className="profile-container">
-      <Tabs defaultActiveKey="1" centered>
-        <TabPane tab="Особиста інформація" key="1">
-          <Card className="profile-card">
-            <Space
-              className="profile_content"
-              direction="vertical"
-              size="large"
-              align="center"
-            >
-              <div className="profile-photo-container">
-                <img src={user.photo} alt="Профіль" className="profile-photo" />
-                <Upload
-                  showUploadList={false}
-                  beforeUpload={() => false}
-                  onChange={handlePhotoChange}
-                >
-                  <Button
-                    icon={<UploadOutlined />}
-                    className="change-photo-button"
-                  >
-                    Змінити фото
-                  </Button>
-                </Upload>
-              </div>
-              <Form layout="vertical" className="profile-form">
-                <Form.Item label="Повне ім'я">
-                  <Input
-                    name="fullName"
-                    value={user.fullName}
-                    onChange={handleInputChange}
-                  />
-                </Form.Item>
-                <Form.Item label="Номер датчика">
-                  <Input
-                    name="sensorNumber"
-                    value={user.sensorNumber}
-                    onChange={handleInputChange}
-                  />
-                </Form.Item>
-                <Form.Item label="Додаткова інформація">
-                  <Input.TextArea
-                    name="additionalInfo"
-                    value={user.additionalInfo}
-                    onChange={handleInputChange}
-                    rows={4}
-                  />
-                </Form.Item>
-                <Form.Item>
-                  <Button type="primary" onClick={handleSave}>
-                    Зберегти
-                  </Button>
-                </Form.Item>
-              </Form>
-            </Space>
-          </Card>
-        </TabPane>
-        <TabPane tab="Статистика" key="2">
-          <div className="statistics_content">
-            <Typography.Title level={4}> Статистика користувача </Typography.Title>
-            <div className="charts">
-                <div className="charts_block">
-                    <CurrentTemperatureCard temperature={36.6} />
-                    <TemperatureDoughnutChart data={data} />
-                </div>
-                <div className="charts_block">
-                    <TemperatureLineChart data={hourlyData} />
-                    <DailyTemperatureChart data={dailyData} />
-                </div>
-            </div>
-          </div>
-        </TabPane>
-      </Tabs>
+      <Tabs defaultActiveKey="1" centered items={tabItems} />
     </div>
   );
 };
